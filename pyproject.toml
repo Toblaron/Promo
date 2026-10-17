@@ -1,0 +1,22 @@
+[project]
+name = "promoter"
+version = "1.0.0"
+description = "YouTube stats -> platform-ready promo posts -> traffic to your site"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.6"]
+
+[project.scripts]
+promoter = "promoter:main"
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "B", "UP", "SIM"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

@@ -1,0 +1,25 @@
+services:
+  promoter:
+    build: .
+    image: promoter:1.0.0
+    container_name: promoter
+    env_file: .env
+    # Run as your host user so ./data stays yours (set PUID/PGID in .env if not 1000)
+    user: "${PUID:-1000}:${PGID:-1000}"
+    volumes:
+      - ./data:/data
+    command: ["watch"]
+    restart: unless-stopped
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop: [ALL]
+    security_opt:
+      - no-new-privileges:true
+    mem_limit: 128m
+    pids_limit: 64
+    logging:
+      driver: json-file
+      options:
+        max-size: "5m"
+        max-file: "3"
